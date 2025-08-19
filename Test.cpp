@@ -3,7 +3,6 @@
 #include <array>
 #include "ActivationFunctions.h"
 #include <math.h>
-#include <math.h>
 
 
 template <typename T>
@@ -292,32 +291,13 @@ int main(){
     a.activationFunction = &relu;
     a.derivativeActivationFunction = &dRelu;
 
-    NeuralNet test({{Neuron(1),Neuron(1)},{Neuron(2),Neuron(2)}, {a}});
-    // NeuralNet test({{Neuron(1),Neuron(1)}, {a}});
-
+    NeuralNet test({{Neuron(1),Neuron(1)}, {a}});
     std::cout << test.feedforward({1}) << "\n";
-
-    try{
-        while(test.costFunction({2}, {4}) > 0.02 || test.costFunction({3}, {9}) > 0.02 || test.costFunction({4}, {16}) > 0.02 || test.costFunction({5}, {25}) > 0.02){
-            double learning{.001};
-            test.backpropagate({1}, {1}, learning);
-            test.backpropagate({2}, {4}, learning);
-            test.backpropagate({3}, {9}, learning);
-            test.backpropagate({4}, {16}, learning);
-            test.backpropagate({5}, {25}, learning);
-    
-            // for(int y{}; y<10; y++){
-            //     test.backpropagate({(double)y}, {pow(y,2)}, learning);
-            // }
-        }
+    for(int x{}; x<100; x++){
+        test.backpropagate({1}, {1});
+        test.backpropagate({2}, {4});
+        test.backpropagate({3}, {9});
     }
-    catch {
-        std::cout << test.feedforward({1}) << "\n";
-        std::cout << test.feedforward({2}) << "\n";
-        std::cout << test.feedforward({3}) << "\n";
-        std::cout << test.feedforward({4}) << "\n";
-        std::cout << test.feedforward({5}) << "\n";
-        test.printInfo();    
-    }
+    std::cout << test.feedforward({1}) << "\n";
     return 0;
 }

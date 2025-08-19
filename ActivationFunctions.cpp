@@ -5,7 +5,7 @@ double sigmoid(double x){
 double dSigmoid(double x){
     return (1-sigmoid(x))*sigmoid(x);
 }
-double tanh(double x){
+double Tanh(double x){
     return 2*sigmoid(x/2)-1;
 }
 double dTanh(double x){
